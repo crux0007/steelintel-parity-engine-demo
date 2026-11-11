@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteelIntel Parity Engine | Market Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PayPal Sandbox SDK (Test Mode) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans antialiased min-h-screen">
+    <div class="max-w-5xl mx-auto p-6 mt-10">
+        <header class="border-b border-gray-700 pb-4 mb-8">
+            <h1 class="text-3xl font-bold text-white tracking-tight">SteelIntel <span class="text-blue-500">Parity Engine</span></h1>
+            <p class="text-sm text-gray-400 mt-1">Enterprise SaaS intelligence for global and domestic steel commodity markets.</p>
+        </header>
+
+        <div class="relative bg-gray-800 rounded-xl shadow-2xl border border-gray-700 overflow-hidden min-h-[500px]">
+            
+            <!-- Locked Paywall State -->
+            <div id="paywall" class="absolute inset-0 bg-gray-900/80 backdrop-blur-md z-10 flex flex-col items-center justify-center p-6 text-center transition-all duration-500">
+                <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <h2 class="text-3xl font-bold text-white mb-2">Premium Market Arbitrage Report</h2>
+                <p class="text-gray-300 mb-8 max-w-lg">Unlock the last 7 days of historical steel spread data (Semis, Billets, Longs, Flats) alongside proprietary AI market sentiment analysis.</p>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-600 shadow-xl min-w-[320px]">
+                    <div class="text-xl font-semibold mb-4 text-white">Unlock for $49.00</div>
+                    <div id="paypal-button-container" class="z-20 relative"></div>
+                </div>
+            </div>
+
+            <!-- Premium Content (Initially blurred out) -->
+            <div id="premium-content" class="p-8 opacity-20 transition-opacity duration-1000 pointer-events-none">
+                <h2 class="text-2xl font-bold text-white mb-6">Unlocked: 7-Day Historical Data & AI Analysis</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-400 mb-3">AI Sentiment Analysis</h3>
+                        <div class="bg-gray-700 p-5 rounded-lg border border-gray-600 h-full">
+                            <p class="text-gray-200 text-sm leading-relaxed">
+                                Market sentiment has remained predominantly <strong class="text-red-400">Bearish</strong> over the last 7 days, peaking around the Pre-Diwali period (Nov 6-7). We saw a brief shift to <strong class="text-yellow-400">Neutral</strong> over the weekend before returning to a Bearish stance by Nov 10-11.<br><br>
+                                Flat products showed the most resilience (holding in the 44-50 range), while Longs and Billets experienced sharper bearish pressure.<br><br>
+                                <span class="text-blue-300 font-semibold">Actionable Insight:</span> With post-Diwali demand still stabilizing, expect near-term resistance for Semis and Billets. Hedging is recommended until a definitive bullish breakout occurs.
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-400 mb-3">Historical Spread Data (Nov 5 - 11, 2026)</h3>
+                        <div class="overflow-x-auto rounded-lg border border-gray-600">
+                            <table class="w-full text-left text-sm text-gray-300 border-collapse">
+                                <thead class="bg-gray-900 text-gray-100">
+                                    <tr>
+                                        <th class="p-3 border-b border-gray-600">Date</th>
+                                        <th class="p-3 border-b border-gray-600">Bias</th>
+                                        <th class="p-3 border-b border-gray-600">Semis</th>
+                                        <th class="p-3 border-b border-gray-600">Billets</th>
+                                        <th class="p-3 border-b border-gray-600">Flats</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-gray-800 divide-y divide-gray-700">
+                                    <tr><td class="p-3">Nov 11</td><td class="p-3 text-red-400 font-medium">65 Bearish</td><td class="p-3">46</td><td class="p-3">43</td><td class="p-3">47</td></tr>
+                                    <tr><td class="p-3">Nov 10</td><td class="p-3 text-red-400 font-medium">71 Bearish</td><td class="p-3">44</td><td class="p-3">42</td><td class="p-3">47</td></tr>
+                                    <tr><td class="p-3">Nov 09</td><td class="p-3 text-yellow-400 font-medium">54 Neutral</td><td class="p-3">49</td><td class="p-3">48</td><td class="p-3">50</td></tr>
+                                    <tr><td class="p-3">Nov 08</td><td class="p-3 text-yellow-400 font-medium">61 Neutral</td><td class="p-3">46</td><td class="p-3">45</td><td class="p-3">47</td></tr>
+                                    <tr><td class="p-3">Nov 07</td><td class="p-3 text-red-400 font-medium">77 Bearish</td><td class="p-3">40</td><td class="p-3">42</td><td class="p-3">44</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: { value: '49.00' },
+                        description: '7-Day Historical Data & AI Analysis'
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Remove paywall and unlock the UI
+                    const paywall = document.getElementById('paywall');
+                    const content = document.getElementById('premium-content');
+                    
+                    paywall.style.opacity = '0';
+                    setTimeout(() => { paywall.style.display = 'none'; }, 500);
+                    
+                    content.classList.remove('opacity-20', 'pointer-events-none');
+                    content.classList.add('opacity-100');
+                    
+                    alert('Payment successful! Thank you, ' + details.payer.name.given_name + '. Your market analysis is unlocked.');
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>
